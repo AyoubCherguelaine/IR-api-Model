@@ -1,7 +1,7 @@
-from model import model,vector
-from model.document import doc,upload
-from model.query import query
-from model.model import similarity
+from app import model,vector
+from app.document import doc,upload
+from app.query import query
+from app.model import similarity
 
 text="""This is a built-in middleware function in Express. It parses incoming requests with JSON payloads and is based on body-parser.
 
