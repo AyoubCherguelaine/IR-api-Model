@@ -10,7 +10,7 @@ class query:
         self.index , self.VectQuery= self.indexing()
 
     def indexing(self):
-        tokens=model.PreProcessing(self.DocText)
+        tokens=model.PreProcessing(self.text)
         return model.indexVectQuery(tokens)
     
 

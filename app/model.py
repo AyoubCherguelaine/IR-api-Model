@@ -85,9 +85,10 @@ def indexVectQuery(token):
 
 class similarity:
 
+
     @staticmethod
     def inner(doc:doc,query:query):
-        ardoc = numpy.array(doc.index)
+        ardoc = numpy.array(doc.getIndex())
         arQue = numpy.array(query.index)
 
         inner = 0.0
@@ -96,18 +97,18 @@ class similarity:
             if i in ardoc[:,:1]:
                 qi= np.where(arQue[:,:1]==i)
                 di= np.where(ardoc[:,:1]==i)
-                inner = inner + (arQue[di[0]][:,1:2][0][0] * ardoc[qi[0]][:,1:2][0][0]  )
+                inner = inner + (arQue[qi[0]][:,1:2][0][0] * ardoc[di[0]][:,1:2][0][0]  )
 
         return inner
 
     @staticmethod
     def dice(doc:doc,query:query):
-        ardoc = numpy.array(doc.index)
+        ardoc = numpy.array(doc.getIndex())
         arQue = numpy.array(query.index)
 
-        inner = similarity.dice(doc,query)
+        inner = similarity.inner(doc,query)
         p1=0.0
-        p2-0.0
+        p2=0.0
 
         qindexs = [r[0] for r in arQue[:,1:2] ]
         for i in qindexs:
@@ -121,3 +122,6 @@ class similarity:
             return 0  
 
         return (2*inner) / (p1+p2 )      
+
+
+     

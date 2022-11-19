@@ -1,21 +1,4 @@
-from app import model,vector
-from app.document import doc,upload
-from app.query import query
-from app.model import similarity
+result= [['6378d64958edc2dff8e3692c', 0.008655037651320181], ['6378d64a58edc2dff8e369fa', 0.014825544242320961], ['6378d64758edc2dff8e368a9', 0.04786480634290087], ['6378d64958edc2dff8e36987', 0.05062458908612755]]
 
-text="""This is a built-in middleware function in Express. It parses incoming requests with JSON payloads and is based on body-parser.
-
-Returns middleware that only parses JSON and only looks at requests where the Content-Type header matches the type option. This parser accepts any Unicode encoding of the body and supports automatic inflation of gzip and deflate encodings.
-
-A new body object containing the parsed data is populated on the request object after the middleware (i.e. req.body), or an empty object () if there was no body to parse, the Content-Type was not matched, or an error occurred."""
-
-
-d = doc(text)
-
-qText = input("query : ")
-
-qr = query(qText)
-
-val = similarity.dice(d,qr)
-
-print("dice : ",val)
+result.sort(key= lambda result:result[1],reverse=True)
+print( result)

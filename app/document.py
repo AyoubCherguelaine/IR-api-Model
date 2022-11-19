@@ -7,22 +7,35 @@ db_ =db("")
 
 
 class doc:
-    def __init__(self,text):
+    
+    def __init__(self):
+        self.text=""
+        self.index=[]
+
+    def init(self,text):    
         self.text= text
         self.index= self.indexing()
 
-    def indexing(self):
-        tokens=model.PreProcessing(self.DocText)
-        return model.indexVect(tokens)
-    
-    def toDict(self):
-        return {
-            "text":self.text,
-            "index":self.index
-        }
+    def getIndex(self):
+        return self.index
 
-    def uploadDoc(self):
-        obj=self.toDict()
+    def initDict(self,dict):
+        self.text= dict['text']
+        self.index = dict["index"]
+
+    def indexing(self):
+        tokens=model.PreProcessing(self.text)
+        return model.indexVect(tokens)
+
+    @staticmethod
+    def toDict(docObj):
+        return {
+            "text":docObj.text,
+            "index":docObj.index
+        }
+    @staticmethod
+    def uploadDoc(docObj):
+        obj=doc.toDict(docObj)
         db_.AddDocument("doc",obj)
 
     @staticmethod
@@ -58,12 +71,16 @@ class upload:
     @staticmethod
     def doProcessIntoDocs(url):
         filesList = upload.__uploadFromFolder(url)
-
+        print(filesList)
+        l = len(filesList)
+        i=1
         for filename in filesList:
+            print("upload : ",i,"/",l,"     ",filename)
             text = upload.__readDoc(url,filename)
-            d = doc(text)
-            d.uploadDoc()
-
+            d = doc()
+            d.init(text)
+            doc.uploadDoc(d)
+            i=i+1
            
     
 

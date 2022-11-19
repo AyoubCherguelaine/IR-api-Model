@@ -24,10 +24,11 @@ class vector:
 
     @staticmethod
     def uploadWords():
-        objs= vector.toDict(vector.inline)
-        vector.CleanWords()
-        db_.AddDocuments("vocab",objs)
-        print("upload words ")
+        if len(vector.inline) > 0 :
+            objs= vector.toDict(vector.inline)
+            vector.CleanWords()
+            db_.AddDocuments("vocab",objs)
+            print("upload words ")
         
 
     @staticmethod
@@ -59,5 +60,5 @@ def init():
 
     [vector.vector.append(str(i["word"])) for i in rs ]
 
-#init()
+init()
 
