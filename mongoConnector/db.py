@@ -49,6 +49,11 @@ class db :
         
         return d    
 
+    def agregate(self,col,idlist):
+        col=self.db.get_collection(col)  
+        r = col.find({"_id":{ "$in" : idlist }})
+        print(r)
+        return r
 
     def CountDoc(self,ColName,query={}):
         col=self.db.get_collection(ColName)    

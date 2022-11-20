@@ -11,10 +11,11 @@ class queryBody(BaseModel):
 
 @router.get('/{doc_id}/detail')
 async def createDoc(doc_id:str):
-    d =doc()
+    
     dic= doc.GetDoc(doc_id)
-    d.initDict(dic)
-    return d.text
+    
+    
+    return dic["text"]
 
 @router.post("/search/all")
 async def createDoc(queryBody:queryBody):
@@ -26,5 +27,22 @@ async def createDoc(queryBody:queryBody):
 async def createDoc(queryBody:queryBody):
     q= query(queryBody.text)
     res = action.calc(q)
-    re = [i for i in res  if i[1] != 0]
+    re = [i for i in res  if i[2] != 0]
+    return re
+
+
+#calcby10
+@router.post('/search/10')
+async def createDoc(queryBody:queryBody):
+    q= query(queryBody.text)
+    res = action.calcby10(q)
+    re = [i for i in res  if i[2] != 0]
+    return re
+
+@router.post("/search/{n}")
+async def searchDocs(queryBody:queryBody,n:int):
+    
+    q= query(queryBody.text)
+    res = action.calcbyn(q,n)
+    re = [i for i in res  if i[2] != 0]
     return re

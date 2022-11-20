@@ -46,7 +46,11 @@ class doc:
     def GetDoc(id:str):
         return db_.GetDocument("doc",{"_id":ObjectId(id)})
 
+    @staticmethod
+    def getDocs(ids_list:list):
+        r = db_.agregate("doc",ids_list)  
         
+        return r
 
 
 class upload:
